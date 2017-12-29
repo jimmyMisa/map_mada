@@ -44,4 +44,5 @@
         <variable name="API_KEY_FOR_ANDROID" value="AIzaSyCVSnOiY_GawHhgXZAufDXiYxnIqgtSdTQ" />
     </plugin>
     <plugin name="cordova-plugin-geolocation" spec="~2.4.3" />
+    <preference name="AndroidPersistentFileLocation" value="Compatibility" />
 </widget>
