@@ -10,10 +10,12 @@
     <content src="index.html" />
     <preference name="DisallowOverscroll" value="true" />
     <preference name="android-minSdkVersion" value="14" />
+   <plugin name="cordova-plugin-whitelist"      source="npm" spec="1.1.0" />
     <allow-navigation href="*" />
     <allow-intent href="*" />
-    <access origin="http://maps.google.com" subdomains="true" />
-    <access origin="*" subdomains="true" />
+
+    <access origin="http://maps.google.com" subdomains="true"/>
+    <access origin="*" subdomains="true"/>
     <allow-intent href="http://*/*" />
     <allow-intent href="https://*/*" />
     <allow-intent href="tel:*" />
