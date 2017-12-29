@@ -3370,7 +3370,6 @@ display:block;
 				update();
 			}
 			function addScroll(){
-				alert(h(document.querySelector(".categories_menu")));
 				if(scrl+3*d<=h(document.querySelector(".categories_menu"))){
 					scrl=scrl+d;
 				}
@@ -3392,7 +3391,9 @@ display:block;
 				consume()
 				function consume(){
 					//left_block_list.scrollTop=iv+(scrl-iv)*k/m;
+					alert(document.querySelector(".categories_menu").style.top);
 					document.querySelector(".categories_menu").style.top=(iv+(-scrl-iv))+"px";
+					alert(document.querySelector(".categories_menu").style.top);
 					/*if(k==m){
 						return true;
 					}
