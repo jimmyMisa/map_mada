@@ -3381,14 +3381,15 @@ display:block;
 				consume()
 				function consume(){
 					//left_block_list.scrollTop=iv+(scrl-iv)*k/m;
-					document.querySelector(".categories_menu").style.top=(iv+(-scrl-iv)*k/m)+"px";
-					if(k==m){
+					document.querySelector(".categories_menu").style.top=(iv+(-scrl-iv))+"px";
+					/*if(k==m){
 						return true;
 					}
 					setTimeout(function(){
 						k++;
 						consume()
 					},1);
+					*/
 					
 				}
 			}
