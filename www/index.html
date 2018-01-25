@@ -2,22 +2,23 @@
 
 
 <meta charset="UTF-8"/>
-<link rel="stylesheet" href="http://sopromer.com/assets/map/assets/css/style.css?ver=1845770752"></link>
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<link rel="stylesheet" href="http://sopromer.com/assets/map/assets/css/style.css?ver=2130414376"></link>
 
 
-<script src="http://sopromer.com/assets/plugins/jQuery/jQuery-2.1.4.min.js?ver=263708973"></script>
+<script src="http://sopromer.com/assets/plugins/jQuery/jQuery-2.1.4.min.js?ver=1484290608"></script>
 
-<script src="http://sopromer.com/assets/map/assets/lib/lib.js?ver=1309848152"></script>
-<script src="http://sopromer.com/assets/map/assets/configs/config.js?ver=254971441"></script>
-<script src="http://sopromer.com/assets/map/assets/modules/map.js?ver=549628481"></script>
-<script src="http://sopromer.com/assets/map/assets/modules/icons.js?ver=1862771693"></script>
-<script src="http://sopromer.com/assets/map/assets/modules/marker.js?ver=1106078111"></script>
-<script src="http://sopromer.com/assets/map/assets/modules/categories.js?ver=1747954903"></script>
-<script src="http://sopromer.com/assets/map/assets/modules/htag.js?ver=1217878140"></script>
-<script src="http://sopromer.com/assets/map/assets/modules/menu.js?ver=567950022"></script>
-<script src="http://sopromer.com/assets/map/assets/modules/info.js?ver=1236723212"></script>
-<script src="http://sopromer.com/assets/map/assets/modules/delimitation.js?ver=144935512"></script>
-<script src="http://sopromer.com/assets/map/assets/jquery.min.js?ver=1939272880"></script>
+<script src="http://sopromer.com/assets/map/assets/lib/lib.js?ver=526718194"></script>
+<script src="http://sopromer.com/assets/map/assets/configs/config.js?ver=1484624186"></script>
+<script src="http://sopromer.com/assets/map/assets/modules/map.js?ver=1062900128"></script>
+<script src="http://sopromer.com/assets/map/assets/modules/icons.js?ver=596217506"></script>
+<script src="http://sopromer.com/assets/map/assets/modules/marker.js?ver=264190023"></script>
+<script src="http://sopromer.com/assets/map/assets/modules/categories.js?ver=1536689238"></script>
+<script src="http://sopromer.com/assets/map/assets/modules/htag.js?ver=1289190637"></script>
+<script src="http://sopromer.com/assets/map/assets/modules/menu.js?ver=1411542016"></script>
+<script src="http://sopromer.com/assets/map/assets/modules/info.js?ver=1786348483"></script>
+<script src="http://sopromer.com/assets/map/assets/modules/delimitation.js?ver=775645904"></script>
+<script src="http://sopromer.com/assets/map/assets/jquery.min.js?ver=1839947141"></script>
 
 
 
@@ -588,7 +589,7 @@ display:block;
 .inputs select{
   border: 1px solid #DDD;
   margin: 2px;
-  padding: 10px;
+  padding: 3px;
   box-sizing: border-box;
   box-shadow: inset 0px 0px 1px 0px rgba(0,0,0,0.3);
   border-radius: 5px;
@@ -702,7 +703,7 @@ display:block;
 	text-align: left;
 }
 .select_virtual.display{
-	height:201px;
+	height:201px !important;
 }
 .map_element{
 	display:inline-block;
@@ -808,7 +809,63 @@ overflow:hidden;
 	
 }
 </style>
-<link rel="stylesheet" href="http://sopromer.com/assets/map/assets/css/search_option.css?ver=1258131957"></link>
+<link rel="stylesheet" href="http://sopromer.com/assets/map/assets/css/search_option.css?ver=1686283754"></link>
+<style>
+@media (max-width:360px){
+	.right_block{
+		width: 80%;
+		right: -80%;
+	}
+}
+@media (max-width:300px){
+	.right_block{
+		width: 75%;
+		right: -75%;
+	}
+}
+
+
+.on_off_data{
+  position: absolute;
+top: 10px;
+left: 103px;
+background-color: #DDD;
+width: 60px;
+height: 17px;
+border-radius: 18px;
+box-shadow: inset 0px 0px 3px 0px rgba(100,100,100,1);
+cursor: pointer;
+z-index:1000;
+}
+.on_off_button{
+  position: absolute;
+top: -2px;
+left: 3px;
+background-color: #F35744;
+width: 22px;
+height: 22px;
+border-radius: 17px;
+box-shadow: 0px 0px 5px -1px rgba(0,30,30,1);
+cursor: pointer;
+transition-duration: 0.5s;
+}
+.on_off_label{
+  font-size: 10px;
+position: absolute;
+top: 0px;
+left: 68px;
+}
+
+.on_off_data.active .on_off_button{
+left: 35px;
+background-color: #1EED09;
+}
+
+
+
+
+
+</style>
 
 
 
@@ -836,12 +893,13 @@ overflow:hidden;
   <div class="search_option">
   <div class="search_option_search">Rechercher</div>
   <div class="search_option_title">Recherche avancée</div>
-  <div class="search_option_content">
+  <div class="search_option_content inputs">
      <div class="adopt_line adv_line">
         <label class="adopt_label adv_label" data-name="categorie">
            Categorie
         </label>
-       <input class="adopt_input adv_input">
+		
+       <select class="adopt_input adv_input categorie_select_search"></select>
      </div>
 	 
      <div class="adopt_line adv_line">
@@ -850,11 +908,140 @@ overflow:hidden;
         </label>
        <input class="adopt_input adv_input">
      </div>
-	 <div class="adopt_line">
+	<div class="adopt_line adv_line">
+	<label class="adopt_label adv_label" data-name="localisation_gps">
+	   Localisation gps
+	</label>
+	<input class="adopt_input adv_input">
+	</div>
+	<div class="adopt_line adv_line">
+	<label class="adopt_label adv_label" data-name="localisation_pratique">
+	   Localisation pratique
+	</label>
+	<input class="adopt_input adv_input">
+	</div>
+	<div class="adopt_line adv_line">
+	<label class="adopt_label adv_label" data-name="nom_connu">
+	   Nom Connu
+	</label>
+	<input class="adopt_input adv_input">
+	</div>
+	<div class="adopt_line adv_line">
+	<label class="adopt_label adv_label" data-name="repere">
+	   Est un point de repère
+	</label>
+		 <select class="adopt_input adv_input">
+			<option value="1">oui</option>
+			<option value="0">non</option>
+		 </select>
+	</div>
+	<div class="adopt_line adv_line">
+	<label class="adopt_label adv_label" data-name="sous_categorie">
+	   Sous Categorie
+	</label>
+	<input class="adopt_input adv_input">
+	</div>
+	<div class="adopt_line adv_line">
+	<label class="adopt_label adv_label" data-name="quartier">
+	   Quartier
+	</label>
+	<input class="adopt_input adv_input">
+	</div>
+	<div class="adopt_line adv_line">
+	<label class="adopt_label adv_label" data-name="adresse">
+	   Adresse
+	</label>
+	<input class="adopt_input adv_input">
+	</div>
+	<div class="adopt_line adv_line">
+	<label class="adopt_label adv_label" data-name="acces">
+	   Acces
+	</label>
+	<input class="adopt_input adv_input">
+	</div>
+	<div class="adopt_line adv_line">
+	<label class="adopt_label adv_label" data-name="possibilite_de_parking">
+	   Possibilite de parking
+	</label>
+		 <select class="adopt_input adv_input">
+			<option value="1">oui</option>
+			<option value="0">non</option>
+		 </select>
+	</div>
+	<div class="adopt_line adv_line">
+	<label class="adopt_label adv_label" data-name="endroit_connus_tres_proche">
+	   Endroit connus tres proche
+	</label>
+	<input class="adopt_input adv_input">
+	</div>
+	<div class="adopt_line adv_line">
+	<label class="adopt_label adv_label" data-name="jours_ouverture">
+	   Jours ouverture
+	</label>
+	<input class="adopt_input adv_input">
+	</div>
+	<div class="adopt_line adv_line">
+	<label class="adopt_label adv_label" data-name="horaires">
+	  Horaires
+	</label>
+	<input class="adopt_input adv_input">
+	</div>
+	<div class="adopt_line adv_line">
+	<label class="adopt_label adv_label" data-name="surface">
+	  Surface
+	</label>
+	<input class="adopt_input adv_input">
+	</div>
+	<div class="adopt_line adv_line">
+	<label class="adopt_label adv_label" data-name="acces_net_mail_fb_site">
+	  Acces net mail fb site
+	</label>
+	<input class="adopt_input adv_input">
+	</div>
+	<div class="adopt_line adv_line">
+	<label class="adopt_label adv_label" data-name="tel_qui_marche">
+	 Tel qui marche
+	</label>
+	<input class="adopt_input adv_input">
+	</div>
+	<div class="adopt_line adv_line">
+	<label class="adopt_label adv_label" data-name="produits_plus">
+	 Produits plus
+	</label>
+	<input class="adopt_input adv_input">
+	</div>
+	<div class="adopt_line adv_line">
+	<label class="adopt_label adv_label" data-name="ex_prix">
+	 Ex prix
+	</label>
+	<input class="adopt_input adv_input">
+	</div>
+	<div class="adopt_line adv_line">
+	<label class="adopt_label adv_label" data-name="usp">
+	 Usp
+	</label>
+	<input class="adopt_input adv_input">
+	</div>
+	<div class="adopt_line adv_line">
+	<label class="adopt_label adv_label" data-name="annee_ouverture">
+	 Annee d'ouverture
+	</label>
+	<input class="adopt_input adv_input">
+	</div>
+	<div class="adopt_line adv_line">
+	<label class="adopt_label adv_label" data-name="donnees_specifiques">
+	 Donnees specifiques
+	</label>
+	<input class="adopt_input adv_input">
+	</div>
+	 
+	 
+	 
+  </div>
+	 <div class="adopt_line adopt_action">
         
        <div class="adopt_button" type="button">Rechercher avec ces critères</div>
      </div>
-  </div>
 </div>
 </div>
 </div>
@@ -878,13 +1065,19 @@ overflow:hidden;
 </div>
   <div class="right_block">
 	<div class="right_option_close">&times;</div>
+	
+	<div class="on_off_data"><div class="on_off_button active"></div>
+  <div class="on_off_label">Reperes</div></div>
+	
 	<div data-name="add_element" class="conditionnal_lines">
+	
+	
 	<div class="conditionnal_line_container">
 		<div class="conditionnal_line">
 			<div class="outer_more">
 				<div class="inner_more"></div>
 			</div>
-			<div class="conditionnal_line_content">Add element</div>
+			<div class="conditionnal_line_content">Ajouter un element</div>
 		</div>
 		<div class="inner_conditionnals categories_element_create"></div>
 	</div>
@@ -893,7 +1086,7 @@ overflow:hidden;
 			<div class="outer_more">
 				<div class="inner_more"></div>
 			</div>
-			<div class="conditionnal_line_content">Add surface</div>
+			<div class="conditionnal_line_content">Ajouter une surface</div>
 		</div>
 	</div>
 	<div class="conditionnal_line_container">
@@ -901,7 +1094,7 @@ overflow:hidden;
 			<div class="outer_more">
 				<div class="inner_more"></div>
 			</div>
-			<div class="conditionnal_line_content">Customize view</div>
+			<div class="conditionnal_line_content">Configuration visuel</div>
 		</div>
 	</div>
 	<div class="conditionnal_line_container">
@@ -909,7 +1102,7 @@ overflow:hidden;
 			<div class="outer_more">
 				<div class="inner_more"></div>
 			</div>
-			<div class="conditionnal_line_content">General config</div>
+			<div class="conditionnal_line_content">Options</div>
 		</div>
 	</div>
 </div>
@@ -1777,16 +1970,18 @@ overflow:hidden;
 		window.readyEC=false;
 		window.readycategorie_select=false;
 		window.categorie_select_id=false;
+		window.categorie_select_search=false;
 		loadContent("categories_menu","readyMenu");
 		loadContent("categories_element_create","readyEC");
 		loadContent("categorie_select","readycategorie_select");
 		loadContent("categorie_select_id","categorie_select_id");
+		loadContent("categorie_select_search","categorie_select_search");
 		wait(preloadedCategories,hear_locals);
 		wait(preloadedCategories,get_callable(then));
 	}
 	preloadCategories(main_ready);
 	function preloadedCategories(){
-		return readyIcon && readyMenu && readyEC && readycategorie_select; 
+		return readyIcon && readyMenu && readyEC && readycategorie_select && categorie_select_id && categorie_select_search; 
 	}
 	
 	
@@ -1872,8 +2067,8 @@ overflow:hidden;
 			window.addEventListener("touchend",flipu);
 		}
 		function fliph(e){
-			if(e.originalEvent){
-				if(x0+10<e.originalEvent.touches[0].pageX){
+			if(e.changedTouches){
+				if(x0+10<e.changedTouches[0].pageX){
 					if(typeof then == "function"){
 						then()
 					}
@@ -1882,6 +2077,126 @@ overflow:hidden;
 			}
 			else{
 				if(x0+10<e.pageX){
+					if(typeof then == "function"){
+						then()
+					}
+					flipu();
+				}
+			}
+		}
+		function flipu(){
+			window.removeEventListener("mouseup",flipu);
+			smt.removeEventListener("mousemove",fliph);
+			smt.addEventListener("mousedown",flipb);
+			window.removeEventListener("touchend",flipu);
+			smt.removeEventListener("touchmove",fliph);
+			smt.addEventListener("touchstart",flipb);
+		}
+	}
+	function flipLeft(smt,then){
+		smt.addEventListener("mousedown",flipb);
+		smt.addEventListener("touchstart",flipb);
+		var x0=null;
+		function flipb(e){
+			x0=e.pageX;
+			smt.removeEventListener("mousedown",flipb);
+			smt.addEventListener("mousemove",fliph);
+			window.addEventListener("mouseup",flipu);
+			smt.removeEventListener("touchstart",flipb);
+			smt.addEventListener("touchmove",fliph);
+			window.addEventListener("touchend",flipu);
+		}
+		function fliph(e){
+			if(e.changedTouches){
+				if(x0-10>e.changedTouches[0].pageX){
+					if(typeof then == "function"){
+						then()
+					}
+					flipu();
+				}
+			}
+			else{
+				if(x0-10>e.pageX){
+					if(typeof then == "function"){
+						then()
+					}
+					flipu();
+				}
+			}
+		}
+		function flipu(){
+			window.removeEventListener("mouseup",flipu);
+			smt.removeEventListener("mousemove",fliph);
+			smt.addEventListener("mousedown",flipb);
+			window.removeEventListener("touchend",flipu);
+			smt.removeEventListener("touchmove",fliph);
+			smt.addEventListener("touchstart",flipb);
+		}
+	}
+	function flipTop(smt,then){
+		smt.addEventListener("mousedown",flipb);
+		smt.addEventListener("touchstart",flipb);
+		var y0=null;
+		function flipb(e){
+			y0=e.pageY;
+			smt.removeEventListener("mousedown",flipb);
+			smt.addEventListener("mousemove",fliph);
+			window.addEventListener("mouseup",flipu);
+			smt.removeEventListener("touchstart",flipb);
+			smt.addEventListener("touchmove",fliph);
+			window.addEventListener("touchend",flipu);
+		}
+		function fliph(e){
+			if(e.changedTouches){
+				if(y0-10>e.changedTouches[0].pageY){
+					if(typeof then == "function"){
+						then()
+					}
+					flipu();
+				}
+			}
+			else{
+				if(y0-10>e.pageY){
+					if(typeof then == "function"){
+						then()
+					}
+					flipu();
+				}
+			}
+		}
+		function flipu(){
+			window.removeEventListener("mouseup",flipu);
+			smt.removeEventListener("mousemove",fliph);
+			smt.addEventListener("mousedown",flipb);
+			window.removeEventListener("touchend",flipu);
+			smt.removeEventListener("touchmove",fliph);
+			smt.addEventListener("touchstart",flipb);
+		}
+	}
+	function flipBottom(smt,then){
+		smt.addEventListener("mousedown",flipb);
+		smt.addEventListener("touchstart",flipb);
+		var y0=null;
+		function flipb(e){
+			y0=e.pageY;
+			smt.removeEventListener("mousedown",flipb);
+			smt.addEventListener("mousemove",fliph);
+			window.addEventListener("mouseup",flipu);
+			smt.removeEventListener("touchstart",flipb);
+			smt.addEventListener("touchmove",fliph);
+			window.addEventListener("touchend",flipu);
+		}
+		function fliph(e){
+			if(e.changedTouches){
+				if(y0+10<e.changedTouches[0].pageY){
+					if(typeof then == "function"){
+						then()
+					}
+					flipu();
+				}
+			}
+			else{
+				if(y0+10<e.pageY){
 					if(typeof then == "function"){
 						then()
 					}
@@ -2671,6 +2986,62 @@ overflow:hidden;
 			mime_file_inputs();
 			mime_select_inputs();
 			
+			
+			for_all_of(".on_off_data",function(e){
+				requestFor("app/showing_repere",function(r){
+					if(!r){
+						opn(function(){
+							cleanMap(function(){
+								window.controller.getInitialData(showDatas);
+							})
+						});
+					}
+					else{
+						cls(function(){
+							cleanMap(function(){
+								window.controller.getInitialData(showDatas);
+							})
+						});
+					}
+				})
+				function opn(then){
+					e.classList.add("active");
+					a=true;
+					requestFor("app/show_repere/1",function(){
+						if(typeof then=="function"){
+							then();
+						}
+					})
+				}
+				function cls(then){
+					e.classList.remove("active");
+					a=false;
+					requestFor("app/show_repere/",function(){
+						if(typeof then=="function"){
+							then();
+						}
+					})
+				}
+				
+				var a=e.classList.contains("active");
+				e.addEventListener("click",function(){
+					if(a){
+						cls(function(){
+							cleanMap(function(){
+								window.controller.getInitialData(showDatas);
+							})
+						});
+					}
+					else{
+						opn(function(){
+							cleanMap(function(){
+								window.controller.getInitialData(showDatas);
+							})
+						});
+					}
+				});
+			},2);
+			
 			hear_bulles();
 			hear_menu();
 			hear_menu_presenter();
@@ -2686,6 +3057,9 @@ overflow:hidden;
 			
 			flipRight(document.querySelector(".right_block"),function(){
 				switch_right_block_close();
+			});
+			flipLeft(document.querySelector(".left_block"),function(){
+				switch_left_block_close();
 			});
 			search_bar_input.addEventListener("keydown",function(e){
 				if(e.keyCode==13){
@@ -2735,6 +3109,9 @@ overflow:hidden;
 			var indexZ=1000;
 			for_all_of(".inputs select",execute,2);
 			function execute(e){
+				_execute(e);
+			}
+			function _execute(e){
 				e.value=e.getAttribute("value");
 				// if(!e.getAttribute("value")){
 					// return null;
@@ -2758,14 +3135,22 @@ overflow:hidden;
 				}
 				var width=e.getBoundingClientRect().width+21;
 				mime.style.width=width+"px";
+				
 				cron(function(){
 					var x=e.getBoundingClientRect().x-e.parentNode.getBoundingClientRect().x-10;
 					var y=e.getBoundingClientRect().y-e.parentNode.getBoundingClientRect().y-3;
 					var height=e.getBoundingClientRect().height;
+					mime.style.height=(height+4)+"px";
 					// y=y+height;
 					mime.style.left=x+"px";
 					mime.style.top=y+"px";
 					mime.style.lineHeight=height+"px";
+					mime.style.minHeight=height+"px";
+					mime.querySelector("input").style.minHeight=height+"px";
+					mime.querySelector("input").style.height=height+"px";
+					mime.querySelector("input").style.width=width-21+"px";
+					width=e.getBoundingClientRect().width+21;
+					mime.style.width=width+"px";
 				});
 				function getMime(){
 					var mime=e.parentNode.querySelector(".select_virtual");
@@ -3583,22 +3968,34 @@ overflow:hidden;
 		function activate_search_option(){
 			var active=false;
 			var search_option_title=search_option.querySelector(".search_option_title");
+			var search_option_content=search_option.querySelector(".search_option_content");
+			var adopt_action=search_option.querySelector(".adopt_action");
+			flipTop(search_option,function(){
+				activation_option_nok();
+			});
 			search_option_title.addEventListener("click",activation_option);
 			function activation_option(e){
-				var search_option_content=search_option.querySelector(".search_option_content");
 				if(active){
-					search_option_content.classList.remove("active");
-					drawStyle("search_option_content",{
-					},".search_option_content");
-					active=false;
+					activation_option_nok()
 				}
 				else{
-					search_option_content.classList.add("active");
-					drawStyle("search_option_content",{
-						"height":(document.body.getBoundingClientRect().height*50/100)+"px"
-					},".search_option_content");
-					active=true;
+					activation_option_ok()
 				}
+			}
+			function activation_option_nok(){
+				search_option_content.classList.remove("active");
+				adopt_action.classList.remove("active");
+				drawStyle("search_option_content",{
+				},".search_option_content");
+				active=false;
+			}
+			function activation_option_ok(){
+				search_option_content.classList.add("active");
+				adopt_action.classList.add("active");
+				drawStyle("search_option_content",{
+					"height":(document.body.getBoundingClientRect().height*50/100)+"px"
+				},".search_option_content");
+				active=true;
 			}
 		}
 		function drawStyle(e,s,q){
@@ -3708,10 +4105,13 @@ overflow:hidden;
 				swl=true;
 			}
 			else{
-				left_block.classList.remove("active");
-				menu_mobile.classList.remove("active");
-				swl=false;
+				switch_left_block_close()
 			}
+		}
+		function switch_left_block_close(){
+			left_block.classList.remove("active");
+			menu_mobile.classList.remove("active");
+			swl=false;
 		}
 		
 	//});
