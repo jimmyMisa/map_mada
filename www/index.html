@@ -3,22 +3,22 @@
 
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<link rel="stylesheet" href="http://sopromer.com/assets/map/assets/css/style.css?ver=1291834788"></link>
+<link rel="stylesheet" href="http://sopromer.com/assets/map/assets/css/style.css?ver=166172884"></link>
 
 
-<script src="http://sopromer.com/assets/plugins/jQuery/jQuery-2.1.4.min.js?ver=10121451"></script>
+<script src="http://sopromer.com/assets/plugins/jQuery/jQuery-2.1.4.min.js?ver=700231205"></script>
 
-<script src="http://sopromer.com/assets/map/assets/lib/lib.js?ver=246021401"></script>
-<script src="http://sopromer.com/assets/map/assets/configs/config.js?ver=543127169"></script>
-<script src="http://sopromer.com/assets/map/assets/modules/map.js?ver=2102661492"></script>
-<script src="http://sopromer.com/assets/map/assets/modules/icons.js?ver=543124051"></script>
-<script src="http://sopromer.com/assets/map/assets/modules/marker.js?ver=805101460"></script>
-<script src="http://sopromer.com/assets/map/assets/modules/categories.js?ver=986062550"></script>
-<script src="http://sopromer.com/assets/map/assets/modules/htag.js?ver=1110892221"></script>
-<script src="http://sopromer.com/assets/map/assets/modules/menu.js?ver=590848582"></script>
-<script src="http://sopromer.com/assets/map/assets/modules/info.js?ver=769637612"></script>
-<script src="http://sopromer.com/assets/map/assets/modules/delimitation.js?ver=1000853972"></script>
-<script src="http://sopromer.com/assets/map/assets/jquery.min.js?ver=1189592660"></script>
+<script src="http://sopromer.com/assets/map/assets/lib/lib.js?ver=179218301"></script>
+<script src="http://sopromer.com/assets/map/assets/configs/config.js?ver=310684777"></script>
+<script src="http://sopromer.com/assets/map/assets/modules/map.js?ver=534507544"></script>
+<script src="http://sopromer.com/assets/map/assets/modules/icons.js?ver=632171910"></script>
+<script src="http://sopromer.com/assets/map/assets/modules/marker.js?ver=655932196"></script>
+<script src="http://sopromer.com/assets/map/assets/modules/categories.js?ver=712162877"></script>
+<script src="http://sopromer.com/assets/map/assets/modules/htag.js?ver=228408011"></script>
+<script src="http://sopromer.com/assets/map/assets/modules/menu.js?ver=1359675849"></script>
+<script src="http://sopromer.com/assets/map/assets/modules/info.js?ver=870650381"></script>
+<script src="http://sopromer.com/assets/map/assets/modules/delimitation.js?ver=2118319262"></script>
+<script src="http://sopromer.com/assets/map/assets/jquery.min.js?ver=121179598"></script>
 
 
 
@@ -809,7 +809,7 @@ overflow:hidden;
 	
 }
 </style>
-<link rel="stylesheet" href="http://sopromer.com/assets/map/assets/css/search_option.css?ver=2000174778"></link>
+<link rel="stylesheet" href="http://sopromer.com/assets/map/assets/css/search_option.css?ver=508404311"></link>
 <style>
 @media (max-width:360px){
 	.right_block{
@@ -2054,6 +2054,9 @@ background-color: #1EED09;
 		return r;
 	}
 	function flipRight(smt,then){
+		if(true){
+			return false;
+		}
 		smt.addEventListener("mousedown",flipb);
 		smt.addEventListener("touchstart",flipb);
 		var x0=null;
@@ -2068,7 +2071,7 @@ background-color: #1EED09;
 		}
 		function fliph(e){
 			if(e.changedTouches){
-				if(x0+10<e.changedTouches[0].pageX){
+				if(x0+50<e.changedTouches[0].pageX){
 					if(typeof then == "function"){
 						then()
 					}
@@ -2076,7 +2079,7 @@ background-color: #1EED09;
 				}
 			}
 			else{
-				if(x0+10<e.pageX){
+				if(x0+50<e.pageX){
 					if(typeof then == "function"){
 						then()
 					}
@@ -2094,6 +2097,9 @@ background-color: #1EED09;
 		}
 	}
 	function flipLeft(smt,then){
+		if(true){
+			return false;
+		}
 		smt.addEventListener("mousedown",flipb);
 		smt.addEventListener("touchstart",flipb);
 		var x0=null;
@@ -2134,6 +2140,9 @@ background-color: #1EED09;
 		}
 	}
 	function flipTop(smt,then){
+		if(true){
+			return false;
+		}
 		smt.addEventListener("mousedown",flipb);
 		smt.addEventListener("touchstart",flipb);
 		var y0=null;
@@ -2174,6 +2183,9 @@ background-color: #1EED09;
 		}
 	}
 	function flipBottom(smt,then){
+		if(true){
+			return false;
+		}
 		smt.addEventListener("mousedown",flipb);
 		smt.addEventListener("touchstart",flipb);
 		var y0=null;
@@ -3106,12 +3118,18 @@ background-color: #1EED09;
 		
 		
 		function mime_select_inputs(){
+			var id=1;
 			var indexZ=1000;
 			for_all_of(".inputs select",execute,2);
 			function execute(e){
 				_execute(e);
 			}
 			function _execute(e){
+				var vid=id;
+				var nid="csk_if"+vid;
+				var nidx="csk_ifx"+vid;
+				id++;
+				
 				e.value=e.getAttribute("value");
 				// if(!e.getAttribute("value")){
 					// return null;
@@ -3120,6 +3138,21 @@ background-color: #1EED09;
 					e.dataset["option_value"]=e.getAttribute("value");
 				}
 				var mime=getMime();
+				
+				
+				for(var i=0;i<mime.classList.length;i++){
+					if(mime.classList[i].indexOf("csk_")==0){
+						mime.classList.remove(mime.classList[i]);
+					}
+				}
+				mime.classList.add(nid);
+				for(var i=0;i<mime.querySelector("input").classList.length;i++){
+					if(mime.querySelector("input").classList[i].indexOf("csl_")==0){
+						mime.querySelector("input").classList.remove(mime.querySelector("input").classList[i]);
+					}
+				}
+				mime.querySelector("input").classList.add(nidx);
+				
 				e.parentNode.appendChild(mime);
 				
 				
@@ -3134,24 +3167,32 @@ background-color: #1EED09;
 					indexZ--;
 				}
 				var width=e.getBoundingClientRect().width+21;
-				mime.style.width=width+"px";
+				//mime.style.width=width+"px";
 				
 				cron(function(){
-					var x=e.getBoundingClientRect().x-e.parentNode.getBoundingClientRect().x-10;
-					var y=e.getBoundingClientRect().y-e.parentNode.getBoundingClientRect().y-3;
+					var x=e.getBoundingClientRect().left-e.parentNode.getBoundingClientRect().left-10;
+					var y=e.getBoundingClientRect().top-e.parentNode.getBoundingClientRect().top-3;
 					var height=e.getBoundingClientRect().height;
-					mime.style.height=(height+4)+"px";
-					// y=y+height;
-					mime.style.left=x+"px";
-					mime.style.top=y+"px";
-					mime.style.lineHeight=height+"px";
-					mime.style.minHeight=height+"px";
-					mime.querySelector("input").style.minHeight=height+"px";
-					mime.querySelector("input").style.height=height+"px";
-					mime.querySelector("input").style.width=width-21+"px";
 					width=e.getBoundingClientRect().width+21;
-					mime.style.width=width+"px";
-				});
+					
+					
+					
+					drawStyle(nid,{
+						"height":(height+4)+"px",
+						"left":x+"px",
+						"top":y+"px",
+						"line-height":height+"px",
+						"min-height":height+"px",
+						"width":width+"px",
+					},"."+nid);
+					drawStyle(nidx,{
+						"minHeight":height+"px",
+						"height":height+"px",
+						"width":(width-21)+"px",
+					},"."+nidx);
+					
+					
+				},1000);
 				function getMime(){
 					var mime=e.parentNode.querySelector(".select_virtual");
 					var text="";
@@ -3241,9 +3282,24 @@ background-color: #1EED09;
 			}
 		}
 		function mime_file_inputs(){
+			var id=1;
 			for_all_of(".inputs input[type=\"file\"]",execute_file,2);
 			function execute_file(e){
+				var vid=id;
+				var nid="cs_if"+vid;
+				
+				
+				id++;
 				var mime=getMime();
+				
+				
+				for(var i=0;i<mime.classList.length;i++){
+					if(mime.classList[i].indexOf("cs_")==0){
+						mime.classList.remove(mime.classList[i]);
+					}
+				}
+				mime.classList.add(nid);
+				
 				e.parentNode.appendChild(mime);
 				
 				e.addEventListener("change",function(ev){
@@ -3252,7 +3308,7 @@ background-color: #1EED09;
 					}
 				});
 				function drawImg(){
-					var url=window.URL.createObjectURL(e.files[0]);
+				  
 					var img=mime.querySelector("img");
 					if(!img){
 						img=document.createElement("img");
@@ -3263,8 +3319,13 @@ background-color: #1EED09;
 							mime.appendChild(img);
 						}
 					}
-					img.src=url;
-					window.URL.revokeObjectURL(url);
+				  var reader  = new FileReader();
+
+				  reader.addEventListener("load", function () {
+					img.src = reader.result;
+				  }, false);
+
+					reader.readAsDataURL(e.files[0]);
 				}
 				
 				
@@ -3277,16 +3338,29 @@ background-color: #1EED09;
 					e.parentNode.style.position="relative";
 				}
 				cron(function(){
-					var x=e.getBoundingClientRect().x-e.parentNode.getBoundingClientRect().x;
-					var y=e.getBoundingClientRect().y-e.parentNode.getBoundingClientRect().y;
+					if(mime.classList.contains(nid)==false){
+						return false;
+					}
+					var x=e.getBoundingClientRect().left-e.parentNode.getBoundingClientRect().left;
+					var y=e.getBoundingClientRect().top-e.parentNode.getBoundingClientRect().top;
 					var width=e.getBoundingClientRect().width;
 					var height=e.getBoundingClientRect().height;
+					drawStyle(nid,{
+						"left":x+"px",
+						"top":y+"px",
+						"width":width+"px",
+						"height":height+"px",
+						"line-height":height+"px"
+					},"."+nid);
+					
+					/*
 					mime.style.left=x+"px";
 					mime.style.top=y+"px";
 					mime.style.width=width+"px";
 					mime.style.height=height+"px";
 					mime.style.lineHeight=height+"px";
-				});
+					*/
+				},1000);
 				function getMime(){
 					var mime=e.parentNode.querySelector(".file_mime");
 					var text="";
@@ -4008,7 +4082,7 @@ background-color: #1EED09;
 			}
 			var str="";
 			for(var i in s){
-				str+=""+i+":"+s[i]+";\n";
+				str+=""+i+":"+s[i]+" !important;\n";
 			}
 			fs.textContent=q+"{"+str+"}";
 			document.body.appendChild(fs);
