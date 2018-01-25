@@ -2,22 +2,22 @@
 
 
 <meta charset="UTF-8"/>
-<link rel="stylesheet" href="http://sopromer.com/assets/map/assets/css/style.css?ver=88084206"></link>
+<link rel="stylesheet" href="http://sopromer.com/assets/map/assets/css/style.css?ver=1845770752"></link>
 
 
-<script src="http://sopromer.com/assets/plugins/jQuery/jQuery-2.1.4.min.js?ver=555608230"></script>
+<script src="http://sopromer.com/assets/plugins/jQuery/jQuery-2.1.4.min.js?ver=263708973"></script>
 
-<script src="http://sopromer.com/assets/map/assets/lib/lib.js?ver=1393841307"></script>
-<script src="http://sopromer.com/assets/map/assets/configs/config.js?ver=1212760524"></script>
-<script src="http://sopromer.com/assets/map/assets/modules/map.js?ver=1818488008"></script>
-<script src="http://sopromer.com/assets/map/assets/modules/icons.js?ver=884861075"></script>
-<script src="http://sopromer.com/assets/map/assets/modules/marker.js?ver=844456645"></script>
-<script src="http://sopromer.com/assets/map/assets/modules/categories.js?ver=1630367910"></script>
-<script src="http://sopromer.com/assets/map/assets/modules/htag.js?ver=276413454"></script>
-<script src="http://sopromer.com/assets/map/assets/modules/menu.js?ver=1245157231"></script>
-<script src="http://sopromer.com/assets/map/assets/modules/info.js?ver=1900431969"></script>
-<script src="http://sopromer.com/assets/map/assets/modules/delimitation.js?ver=734156728"></script>
-<script src="http://sopromer.com/assets/map/assets/jquery.min.js?ver=833197292"></script>
+<script src="http://sopromer.com/assets/map/assets/lib/lib.js?ver=1309848152"></script>
+<script src="http://sopromer.com/assets/map/assets/configs/config.js?ver=254971441"></script>
+<script src="http://sopromer.com/assets/map/assets/modules/map.js?ver=549628481"></script>
+<script src="http://sopromer.com/assets/map/assets/modules/icons.js?ver=1862771693"></script>
+<script src="http://sopromer.com/assets/map/assets/modules/marker.js?ver=1106078111"></script>
+<script src="http://sopromer.com/assets/map/assets/modules/categories.js?ver=1747954903"></script>
+<script src="http://sopromer.com/assets/map/assets/modules/htag.js?ver=1217878140"></script>
+<script src="http://sopromer.com/assets/map/assets/modules/menu.js?ver=567950022"></script>
+<script src="http://sopromer.com/assets/map/assets/modules/info.js?ver=1236723212"></script>
+<script src="http://sopromer.com/assets/map/assets/modules/delimitation.js?ver=144935512"></script>
+<script src="http://sopromer.com/assets/map/assets/jquery.min.js?ver=1939272880"></script>
 
 
 
@@ -808,7 +808,7 @@ overflow:hidden;
 	
 }
 </style>
-<link rel="stylesheet" href="http://sopromer.com/assets/map/assets/css/search_option.css?ver=832013714"></link>
+<link rel="stylesheet" href="http://sopromer.com/assets/map/assets/css/search_option.css?ver=1258131957"></link>
 
 
 
@@ -1860,25 +1860,42 @@ overflow:hidden;
 	}
 	function flipRight(smt,then){
 		smt.addEventListener("mousedown",flipb);
+		smt.addEventListener("touchstart",flipb);
 		var x0=null;
 		function flipb(e){
 			x0=e.pageX;
 			smt.removeEventListener("mousedown",flipb);
 			smt.addEventListener("mousemove",fliph);
 			window.addEventListener("mouseup",flipu);
+			smt.removeEventListener("touchstart",flipb);
+			smt.addEventListener("touchmove",fliph);
+			window.addEventListener("touchend",flipu);
 		}
 		function fliph(e){
-			if(x0+10<e.pageX){
-				if(typeof then == "function"){
-					then()
+			if(e.originalEvent){
+				if(x0+10<e.originalEvent.touches[0].pageX){
+					if(typeof then == "function"){
+						then()
+					}
+					flipu();
 				}
-				flipu();
+			}
+			else{
+				if(x0+10<e.pageX){
+					if(typeof then == "function"){
+						then()
+					}
+					flipu();
+				}
 			}
 		}
 		function flipu(){
 			window.removeEventListener("mouseup",flipu);
 			smt.removeEventListener("mousemove",fliph);
 			smt.addEventListener("mousedown",flipb);
+			window.removeEventListener("touchend",flipu);
+			smt.removeEventListener("touchmove",fliph);
+			smt.addEventListener("touchstart",flipb);
 		}
 	}
 	function searchFor(key,then){
