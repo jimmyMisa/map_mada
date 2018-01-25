@@ -777,10 +777,35 @@ display:block;
     max-width: 80%;
 }
 }
+@media (max-width:980px){
+.select_virtual,.file_mime{
+  display: none;
+}
+  }
 
 
+@media (max-width:360px){
+.left_block{
+  max-width:75%;
+}
+  }
+  
+.categories_menu{
+position:absolute;
+max-width:80%;
+}
+.left_block_blocks{
+overflow:hidden;
+}
 </style>
 
+<style id="ibl">
+
+.categories_menu{
+	top:0px;
+	
+}
+</style>
 
 
 
@@ -3343,6 +3368,7 @@ display:block;
 			}
 		}
 		function hear_scrolls(){
+			
 			var d=42;
 			var scrl=0;
 			left_block_up_bar.addEventListener("click",remScroll);
@@ -3357,30 +3383,37 @@ display:block;
 				update();
 			}
 			function addScroll(){
-				if(scrl+d<=left_block_list.scrollTopMax){
+				if(scrl+3*d<=h(document.querySelector(".categories_menu"))){
 					scrl=scrl+d;
 				}
 				else{
-					scrl=left_block_list.scrollTopMax;
+					scrl=h(document.querySelector(".categories_menu"))-2*d;
 				}
 				update();
 			}
+			function h(e){
+				return window.getComputedStyle(e)["height"].substring(0,window.getComputedStyle( e)["height"].length-2)-0
+			}
+			function t(e){
+				return window.getComputedStyle(e)["top"].substring(0,window.getComputedStyle( e)["top"].length-2)-0
+			}
 			function update(){
-				var iv=left_block_list.scrollTop;
+				var iv=t(document.querySelector(".categories_menu"));
 				var m=10;
 				var k=0;
 				consume()
 				function consume(){
 					//left_block_list.scrollTop=iv+(scrl-iv)*k/m;
-					left_block_list.scrollTop=iv+(scrl-iv);
-					/*if(k==m){
+					document.getElementById("ibl").innerHTML=".categories_menu{top:"+(iv+(-scrl-iv)*k/m)+";}";
+					if(k==m){
 						return true;
 					}
 					setTimeout(function(){
 						k++;
 						consume()
-					},10);
-					*/
+					},1);
+					
+					
 				}
 			}
 		}

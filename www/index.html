@@ -2,22 +2,22 @@
 
 
 <meta charset="UTF-8"/>
-<link rel="stylesheet" href="http://sopromer.com/assets/map/assets/css/style.css?ver=1174948446"></link>
+<link rel="stylesheet" href="http://sopromer.com/assets/map/assets/css/style.css?ver=1585987065"></link>
 
 
-<script src="http://sopromer.com/assets/plugins/jQuery/jQuery-2.1.4.min.js?ver=872726261"></script>
+<script src="http://sopromer.com/assets/plugins/jQuery/jQuery-2.1.4.min.js?ver=59385122"></script>
 
-<script src="http://sopromer.com/assets/map/assets/lib/lib.js?ver=1139897738"></script>
-<script src="http://sopromer.com/assets/map/assets/configs/config.js?ver=946586514"></script>
-<script src="http://sopromer.com/assets/map/assets/modules/map.js?ver=2026538944"></script>
-<script src="http://sopromer.com/assets/map/assets/modules/icons.js?ver=968627238"></script>
-<script src="http://sopromer.com/assets/map/assets/modules/marker.js?ver=2041955395"></script>
-<script src="http://sopromer.com/assets/map/assets/modules/categories.js?ver=1463118663"></script>
-<script src="http://sopromer.com/assets/map/assets/modules/htag.js?ver=1291181040"></script>
-<script src="http://sopromer.com/assets/map/assets/modules/menu.js?ver=615637235"></script>
-<script src="http://sopromer.com/assets/map/assets/modules/info.js?ver=797382516"></script>
-<script src="http://sopromer.com/assets/map/assets/modules/delimitation.js?ver=578635125"></script>
-<script src="http://sopromer.com/assets/map/assets/jquery.min.js?ver=1501737798"></script>
+<script src="http://sopromer.com/assets/map/assets/lib/lib.js?ver=2018501845"></script>
+<script src="http://sopromer.com/assets/map/assets/configs/config.js?ver=1211031761"></script>
+<script src="http://sopromer.com/assets/map/assets/modules/map.js?ver=2134724989"></script>
+<script src="http://sopromer.com/assets/map/assets/modules/icons.js?ver=1029027494"></script>
+<script src="http://sopromer.com/assets/map/assets/modules/marker.js?ver=118988750"></script>
+<script src="http://sopromer.com/assets/map/assets/modules/categories.js?ver=166336298"></script>
+<script src="http://sopromer.com/assets/map/assets/modules/htag.js?ver=2092689067"></script>
+<script src="http://sopromer.com/assets/map/assets/modules/menu.js?ver=1393697697"></script>
+<script src="http://sopromer.com/assets/map/assets/modules/info.js?ver=809240205"></script>
+<script src="http://sopromer.com/assets/map/assets/modules/delimitation.js?ver=1037064071"></script>
+<script src="http://sopromer.com/assets/map/assets/jquery.min.js?ver=2017611494"></script>
 
 
 
@@ -799,6 +799,7 @@ overflow:hidden;
 }
 </style>
 
+
 <style id="ibl">
 
 .categories_menu{
@@ -806,6 +807,9 @@ overflow:hidden;
 	
 }
 </style>
+<link rel="stylesheet" href="http://sopromer.com/assets/map/assets/css/search_option.css?ver=869235819"></link>
+
+
 
 
 
@@ -825,9 +829,32 @@ overflow:hidden;
   <div class="menu_mobile_middle"></div>
   <div class="menu_mobile_after"></div>
 </div>
-  <div class="search_bar" data-bulle="Faire des recherches">
-<img src="http://sopromer.com/assets/refonte/icons/search.png" style="width: 21px;position: relative;top: 0px;left: 7px;vertical-align: middle;">
-  <input class="search_bar_input" placeholder="Search with a keyword">
+  <div class="search_bar">
+<img class="search_bar_opener" src="http://sopromer.com/assets/refonte/icons/search.png" style="width: 21px;position: relative;top: 0px;left: 7px;vertical-align: middle;">
+  <input class="search_bar_input" placeholder="Search with a keyword" data-bulle="Faire des recherches">
+  <div class="search_option">
+  <div class="search_option_search">Rechercher</div>
+  <div class="search_option_title">Recherche avancée</div>
+  <div class="search_option_content">
+     <div class="adopt_line adv_line">
+        <label class="adopt_label adv_label" data-name="categorie">
+           Categorie
+        </label>
+       <input class="adopt_input adv_input">
+     </div>
+	 
+     <div class="adopt_line adv_line">
+        <label class="adopt_label adv_label" data-name="nom_officiel">
+           Nom officiel
+        </label>
+       <input class="adopt_input adv_input">
+     </div>
+	 <div class="adopt_line">
+        
+       <div class="adopt_button" type="button">Rechercher avec ces critères</div>
+     </div>
+  </div>
+</div>
 </div>
 </div>
 <div class="content_map">
@@ -1661,8 +1688,12 @@ overflow:hidden;
 	window.left_block=document.querySelector(".left_block");
 	window.right_block=document.querySelector(".right_block");
 	window.menu_presenters=document.querySelectorAll(".menu_presenter");
+	window.adopt_button=document.querySelector(".adopt_button");
 	window.search_bar=document.querySelector(".search_bar");
+	window.search_bar_opener=document.querySelector(".search_bar_opener");
 	window.search_bar_input=document.querySelector(".search_bar_input");
+	window.search_option=document.querySelector(".search_option");
+	window.search_option_search=document.querySelector(".search_option_search");
 	window.right_option_close=document.querySelector(".right_option_close");
 	window.left_block_up_bar=document.querySelector(".left_block_up_bar");
 	window.left_block_down_bar=document.querySelector(".left_block_down_bar");
@@ -1816,7 +1847,40 @@ overflow:hidden;
 		formData.append("categories",JSON.stringify(categories));
 		requestFor("app/get_all_of_categorie",showDatas,formData);
 	}
-	function showDatas(data){
+	function getAdvParam(){
+		var adv_lines=document.querySelectorAll(".adv_line");
+		var r={};
+		for(var i=0;i<adv_lines.length;i++){
+			var adv_label=adv_lines[i].querySelector(".adv_label");
+			var adv_input=adv_lines[i].querySelector(".adv_input");
+			r[adv_label.dataset["name"]]=adv_input.value;
+		}
+		return r;
+	}
+	function seachFor(key,then){
+		var formData=new FormData();
+		param={
+			"key":key
+		}
+		formData.append("param",JSON.stringify(param));
+		requestFor("app/search_for_param",function(data){
+			showDatas(data,then);
+		},formData);
+	}
+	function seachForAdv(key,then){
+		var formData=new FormData();
+		param={
+		}
+		var advparam=getAdvParam();
+		for(var i in advparam){
+			param[i]=advparam[i];
+		}
+		formData.append("param",JSON.stringify(param));
+		requestFor("app/search_for_param",function(data){
+			showDatas(data,then);
+		},formData);
+	}
+	function showDatas(data,then){
 		window.addEventListener("click",function(){
 			if(using_hover_main){
 				using_hover=true;
@@ -1824,6 +1888,9 @@ overflow:hidden;
 		});
 		for(var i in data){
 			drawing(data[i]);
+		}
+		if(typeof then == "function"){
+			then(data);
 		}
 		function drawing(d){
 			if(d.coords && d.coords!="0"){
@@ -2533,6 +2600,7 @@ overflow:hidden;
 			menu_presenters=document.querySelectorAll(".menu_presenter");
 			search_bar=document.querySelector(".search_bar");
 			search_bar_input=document.querySelector(".search_bar_input");
+			search_option=document.querySelector(".search_option");
 			right_option_close=document.querySelector(".right_option_close");
 			left_block_up_bar=document.querySelector(".left_block_up_bar");
 			left_block_down_bar=document.querySelector(".left_block_down_bar");
@@ -2560,6 +2628,44 @@ overflow:hidden;
 			
 			window.addEventListener("click",activation_search_bar);
 			window.addEventListener("keydown",activation_search_bar_key_out);
+			var searching=false;
+			search_option_search.addEventListener("click",searchingFor);
+			adopt_button.addEventListener("click",searchingForAdv);
+			search_bar_opener.addEventListener("click",searchingFor);
+			search_bar_input.addEventListener("keydown",function(e){
+				if(e.keyCode==13){
+					if(searching){
+						wait(function(){
+							return !searching;
+						},searchingFor);
+					}
+					else{
+						searchingFor();
+					}
+				}
+			});
+			function searchingFor(){
+				searching=true;
+				setTimeout(function(){
+					cleanMap(function(){
+						seachFor(search_bar_input.value,function(){
+							searching=false;
+						})
+					});
+				},100);
+			}
+			function searchingForAdv(){
+				searching=true;
+				setTimeout(function(){
+					cleanMap(function(){
+						seachForAdv(search_bar_input.value,function(){
+							searching=false;
+						})
+					});
+				},100);
+			}
+			
+			activate_seach_option();
 			
 			right_option_close.addEventListener("click",switch_right_block_close);
 			hear_locals=function(){
@@ -3389,6 +3495,7 @@ overflow:hidden;
 				else{
 					scrl=h(document.querySelector(".categories_menu"))-2*d;
 				}
+				
 				update();
 			}
 			function h(e){
@@ -3404,7 +3511,8 @@ overflow:hidden;
 				consume()
 				function consume(){
 					//left_block_list.scrollTop=iv+(scrl-iv)*k/m;
-					document.getElementById("ibl").innerHTML=".categories_menu{top:"+(iv+(-scrl-iv)*k/m)+";}";
+					
+					document.getElementById("ibl").innerHTML=".categories_menu{top:"+(iv+(-scrl-iv)*k/m)+"px;}";
 					if(k==m){
 						return true;
 					}
@@ -3417,13 +3525,53 @@ overflow:hidden;
 				}
 			}
 		}
+		function activate_seach_option(){
+			var active=false;
+			var search_option_title=search_option.querySelector(".search_option_title");
+			search_option_title.addEventListener("click",activation_option);
+			function activation_option(e){
+				var search_option_content=search_option.querySelector(".search_option_content");
+				if(active){
+					search_option_content.classList.remove("active");
+					drawStyle("search_option_content",{
+					},".search_option_content");
+					active=false;
+				}
+				else{
+					search_option_content.classList.add("active");
+					drawStyle("search_option_content",{
+						"height":(document.body.getBoundingClientRect().height*50/100)+"px"
+					},".search_option_content");
+					active=true;
+				}
+			}
+		}
+		function drawStyle(e,s,q){
+			var fs=document.querySelector("style[data-style=\""+e+"\"]");
+			if(!fs){
+				createFs();
+			}
+			else{
+				fs.parentNode.removeChild(fs);
+			}
+			var str="";
+			for(var i in s){
+				str+=""+i+":"+s[i]+";\n";
+			}
+			fs.textContent=q+"{"+str+"}";
+			document.body.appendChild(fs);
+			function createFs(){
+				fs=document.createElement("style");
+				fs.dataset["style"]=e;
+			}
+		}
 		function activation_search_bar_key_out(e){
 			if(e.keyCode==27 || e.keyCode==9){
 				desactivate_search_bar();
 			}
 		}
 		function activation_search_bar(e){
-			if(e.target==search_bar_input){
+			if(e.target==search_bar_input || e.target==search_option || exist(e.target,search_option)){
 				activate_search_bar();
 			}
 			else{
@@ -3432,10 +3580,13 @@ overflow:hidden;
 		}
 		function desactivate_search_bar(){
 			search_bar.classList.remove("active");
+			search_option.classList.remove("active");
 			search_bar_input.blur();
 		}
 		function activate_search_bar(){
 			search_bar.classList.add("active");
+			search_option.classList.add("active");
+			
 		}
 		function switch_right_block(i){
 			return function(){
