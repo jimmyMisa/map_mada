@@ -3,22 +3,22 @@
 
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<link rel="stylesheet" href="http://sopromer.com/assets/map/assets/css/style.css?ver=833834142"></link>
+<link rel="stylesheet" href="http://sopromer.com/assets/map/assets/css/style.css?ver=1291834788"></link>
 
 
-<script src="http://sopromer.com/assets/plugins/jQuery/jQuery-2.1.4.min.js?ver=1671616971"></script>
+<script src="http://sopromer.com/assets/plugins/jQuery/jQuery-2.1.4.min.js?ver=10121451"></script>
 
-<script src="http://sopromer.com/assets/map/assets/lib/lib.js?ver=905677837"></script>
-<script src="http://sopromer.com/assets/map/assets/configs/config.js?ver=620631340"></script>
-<script src="http://sopromer.com/assets/map/assets/modules/map.js?ver=1557585600"></script>
-<script src="http://sopromer.com/assets/map/assets/modules/icons.js?ver=337369424"></script>
-<script src="http://sopromer.com/assets/map/assets/modules/marker.js?ver=353678753"></script>
-<script src="http://sopromer.com/assets/map/assets/modules/categories.js?ver=881456616"></script>
-<script src="http://sopromer.com/assets/map/assets/modules/htag.js?ver=1916807992"></script>
-<script src="http://sopromer.com/assets/map/assets/modules/menu.js?ver=994949348"></script>
-<script src="http://sopromer.com/assets/map/assets/modules/info.js?ver=58665392"></script>
-<script src="http://sopromer.com/assets/map/assets/modules/delimitation.js?ver=1207860779"></script>
-<script src="http://sopromer.com/assets/map/assets/jquery.min.js?ver=361282790"></script>
+<script src="http://sopromer.com/assets/map/assets/lib/lib.js?ver=246021401"></script>
+<script src="http://sopromer.com/assets/map/assets/configs/config.js?ver=543127169"></script>
+<script src="http://sopromer.com/assets/map/assets/modules/map.js?ver=2102661492"></script>
+<script src="http://sopromer.com/assets/map/assets/modules/icons.js?ver=543124051"></script>
+<script src="http://sopromer.com/assets/map/assets/modules/marker.js?ver=805101460"></script>
+<script src="http://sopromer.com/assets/map/assets/modules/categories.js?ver=986062550"></script>
+<script src="http://sopromer.com/assets/map/assets/modules/htag.js?ver=1110892221"></script>
+<script src="http://sopromer.com/assets/map/assets/modules/menu.js?ver=590848582"></script>
+<script src="http://sopromer.com/assets/map/assets/modules/info.js?ver=769637612"></script>
+<script src="http://sopromer.com/assets/map/assets/modules/delimitation.js?ver=1000853972"></script>
+<script src="http://sopromer.com/assets/map/assets/jquery.min.js?ver=1189592660"></script>
 
 
 
@@ -809,7 +809,7 @@ overflow:hidden;
 	
 }
 </style>
-<link rel="stylesheet" href="http://sopromer.com/assets/map/assets/css/search_option.css?ver=1359233165"></link>
+<link rel="stylesheet" href="http://sopromer.com/assets/map/assets/css/search_option.css?ver=2000174778"></link>
 <style>
 @media (max-width:360px){
 	.right_block{
@@ -2990,14 +2990,14 @@ background-color: #1EED09;
 			for_all_of(".on_off_data",function(e){
 				requestFor("app/showing_repere",function(r){
 					if(r){
-						opn(function(){
+						cls(function(){
 							cleanMap(function(){
 								window.controller.getInitialData(showDatas);
 							})
 						});
 					}
 					else{
-						cls(function(){
+						opn(function(){
 							cleanMap(function(){
 								window.controller.getInitialData(showDatas);
 							})
@@ -3007,7 +3007,7 @@ background-color: #1EED09;
 				function opn(then){
 					e.classList.add("active");
 					a=true;
-					requestFor("app/show_repere/1",function(){
+					requestFor("app/show_repere/",function(){
 						if(typeof then=="function"){
 							then();
 						}
@@ -3016,7 +3016,7 @@ background-color: #1EED09;
 				function cls(then){
 					e.classList.remove("active");
 					a=false;
-					requestFor("app/show_repere/",function(){
+					requestFor("app/show_repere/1",function(){
 						if(typeof then=="function"){
 							then();
 						}
@@ -3025,15 +3025,15 @@ background-color: #1EED09;
 				
 				var a=e.classList.contains("active");
 				e.addEventListener("click",function(){
-					if(a){
-						cls(function(){
+					if(!a){
+						opn(function(){
 							cleanMap(function(){
 								window.controller.getInitialData(showDatas);
 							})
 						});
 					}
 					else{
-						opn(function(){
+						cls(function(){
 							cleanMap(function(){
 								window.controller.getInitialData(showDatas);
 							})
